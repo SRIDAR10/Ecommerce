@@ -1,0 +1,150 @@
+main {
+  background-color: #eee;
+}
+body {
+  overflow: hidden;
+}
+.app-main-header {
+  display: flex;
+  align-items: center;
+  height: 45px;
+  gap: 20px;
+  border-bottom: 1px solid #eee;
+  padding: 1em;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 4px 6px -6px gray;
+}
+.search-container {
+  width: 20%;
+  height: 30px;
+}
+.app-main-body {
+  display: flex;
+  overflow: hidden;
+}
+.filter {
+  height: calc(100vh - 126px);
+  width: 300px;
+  background-color: white;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+.product {
+  height: calc(100vh - 128px);
+  overflow: auto;
+  margin: 20px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
+  }
+}
+
+.card {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0px 0px 5px 2px rgba(204, 204, 204, 1);
+  transition: box-shadow, transform 0.5s ease;
+  background-color: white;
+  color: black;
+}
+
+.card:hover {
+  box-shadow: 0px 0px 5px 5px rgba(204, 204, 204, 1);
+  transform: scale(0.95);
+}
+
+.card h5 {
+  margin: 10px 0;
+}
+
+.card-image {
+  width: 100%;
+  max-width: 50%;
+}
+
+.card-description {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.card-price {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.card-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 100%;
+  }
+}
+.add-to-cart-header {
+  display: flex;
+  align-items: center;
+}
+
+.add-to-cart-close-btn {
+  background-color: white;
+  margin-right: 8px;
+  margin-left: auto;
+  border: 1px solid #eee;
+}
+.flex {
+  display: flex;
+}
+.gap-10 {
+  gap: 10px;
+}
+
+.drawer-close-btn {
+  margin-left: auto;
+  margin-right: 40px;
+  border: 1px solid #eee;
+}
+.drawer-body {
+  padding: 1em;
+  height: calc(100vh - 100px);
+  overflow: auto;
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+}
+.drawer-title{
+  padding-left: 1em;
+}
