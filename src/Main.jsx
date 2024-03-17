@@ -47,7 +47,7 @@ const Main = () => {
     axios
       .post("http://localhost:3000/create-checkout-session", addToCartInfo)
       .then((response) => {
-        console.log("Redirecting to:", response);
+        console.log("Redirecting to : ", response);
         window.location.href = response.data.redirectUrl;
       });
   };
