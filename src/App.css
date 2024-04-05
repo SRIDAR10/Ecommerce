@@ -19,8 +19,12 @@ body {
   box-shadow: 0 4px 6px -6px gray;
 }
 .search-container {
-  width: 20%;
-  height: 30px;
+  width: 300px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  
+
 }
 .app-main-body {
   display: flex;
@@ -44,6 +48,10 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
+}
+.header-actions{
+  margin-left: auto;
+  margin-right: 20px;
 }
 
 @media (max-width: 992px) {
@@ -105,6 +113,26 @@ body {
   font-weight: bold;
   font-size: 13px;
 }
+.ant-input-search-button {
+  height: 43px !important;
+  background-color: #FFDE00;
+}
+.caro-img {
+  width: inherit;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  transform: scale(0.8);
+  /* object-fit: cover; */
+}
+.about-txt{
+  padding: 1em;
+  line-height: 1.6;
+  font-family: sans-serif;
+  background-color: white;
+}
 
 @media (max-width: 768px) {
   .card {
@@ -130,8 +158,7 @@ body {
 }
 
 .drawer-close-btn {
-  margin-left: auto;
-  margin-right: 40px;
+  
   border: 1px solid #eee;
 }
 .drawer-body {
@@ -147,4 +174,27 @@ body {
 }
 .drawer-title{
   padding-left: 1em;
+}
+.modal-img{
+  height: 200px;
+  width: 200px;
+  
+}
+.modal-parentimg{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.width-full{
+  width: 100%;
+}
+.width-50{
+  width: 50%;
+}
+.text-align-left{
+  text-align: left;
+}
+.width-18-5{
+  width:18.5%;
 }

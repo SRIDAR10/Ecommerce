@@ -1,21 +1,36 @@
 import { useEffect, useState } from "react";
 import fakeData from "./fakeData";
-
+import {ShoppingCartOutlined} from '@ant-design/icons';
+import { Button, Flex, Modal, Typography } from "antd";
+import { Card } from 'antd';
+import axios from "axios";
+const {Text} = Typography;
 const Cards = ({
   selectedPriceRange,
   selectedBrands,
   selectedRating,
   searchQuery,
-  setInfo
+  setInfo,
+  handleCheckout
 }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleCancel = () =>{
+      setIsModalOpen(false);
+  }
+ 
+  const [selectedCard, setSelectedCard] = useState(false);
+  const onCardClick = (product) =>{
+    setSelectedCard(product);
+    setIsModalOpen(true);
+}
   console.log(selectedPriceRange);
-
+  const [products, setProducts] = useState([]);
   const brandFilter = (product) => {
     if (!selectedBrands.length) {
       return true;
     }
-    if (selectedBrands.length > 0 && selectedBrands.includes(product.brand)) {
+    if (selectedBrands.length > 0 && selectedBrands.includes(product.company)) {
       return true;
     }
     return false;
@@ -27,7 +42,7 @@ const Cards = ({
     }
     // Check if any of the selected ratings are less than or equal to the product's rating
     return selectedRating.some(
-      (rating) => parseFloat(product.rating) >= parseFloat(rating),
+      (rating) => parseFloat(product.star_rating) >= parseFloat(rating),
     );
   };
 
@@ -44,9 +59,23 @@ const Cards = ({
       });
     }
   };
+  
+  useEffect(() =>{
+    try {
+      const response = axios.get("http://localhost:3000/product/get-products").then((data)=>{
+        console.log(data);
+        setProducts(data?.data?.products);
+      });
+      
+    } catch (error) {
+      console.error("Error fetching image:", error);
+      return null; // Return null if there's an error fetching the image
+    }
 
+  },[]);
   useEffect(() => {
-    const filtered = fakeData.filter((product) => {
+   
+    const filtered =products && products?.length && products?.filter((product) => {
       if (
         amountRangeFilter(product) &&
         ratingFilter(product) &&
@@ -57,7 +86,7 @@ const Cards = ({
     });
 
     setFilteredProducts(filtered);
-  }, [selectedPriceRange, selectedBrands, selectedRating]);
+  }, [selectedPriceRange, selectedBrands, selectedRating,products]);
 
   const Truncate = (string, number) => {
     if (!string) {
@@ -68,12 +97,12 @@ const Cards = ({
     }
     return string.slice(0, number) + "...";
   };
-  console.log(
-    "search==========",
-    filteredProducts.filter((product) =>
-      product?.title.toLowerCase().includes(searchQuery.toLowerCase()),
-    ),
-  );
+  // console.log(
+  //   "search==========",
+  //   filteredProducts?.filter((product) =>
+  //     product?.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  //   ),
+  // );
 
   const handleAddToCart = (product) => {
     let productInfo = JSON.parse(localStorage.getItem("product")) || [];
@@ -97,37 +126,78 @@ const Cards = ({
   return (
     <section className="product">
       <div className="grid">
-        {filteredProducts
+        {filteredProducts && filteredProducts?.length && filteredProducts
           .filter((product) =>
-            product?.title.toLowerCase().includes(searchQuery.toLowerCase()),
+            product?.product_name.toLowerCase().includes(searchQuery.toLowerCase()),
           )
           .map((product) => (
-            <div className="card" key={product.id}>
-              <img src={product.image} alt={product.title} />
+            <div className="card" onClick={()=>onCardClick(product)} key={product.id}>
+              <img alt="PVC Conduit Pipes" src={product.image} />
               <div className="card-body">
                 <h5
                   className="card-title"
-                  title={product.title.length >= 50 ? product.title : null}
+                  title={product.product_name?.length >= 50 ? product?.product_name : null}
                 >
-                  {Truncate(product.title, 55)}
+                  {Truncate(product.product_name, 55)}
                 </h5>
                 <div>
-                  <strong>{product?.brand}</strong>
+                  <strong>{product?.company}</strong>
                 </div>
                 <p className="card-description">
                   {Truncate(product.description, 55)}
                 </p>
                 <p className="card-price">₹{product.price}</p>
-                <p className="card-rating">{product.rating}</p>
-                <button onClick={() => handleAddToCart(product)}>
+                <p className="card-rating">{product.star_rating}</p>
+                <Flex gap={6}>
+                <Button onClick={() => handleAddToCart(product)}style = {{backgroundColor :"#FFDE00"}} icon = {<ShoppingCartOutlined />}>
                   Add to Cart
-                </button>
+                </Button>
+                <Button onClick={() => handleCheckout([product])} style = {{backgroundColor :"orange"}}>Buy Now</Button>
+                </Flex>
               </div>
             </div>
+            
+                
+          
           ))}
+          <Modal title={<Text>  {selectedCard?.product_name} </Text>} open={isModalOpen} onCancel={handleCancel}
+            footer={[
+              <Button key="back" onClick={handleCancel}>
+                Cancel
+              </Button>,
+              <Button onClick={() => handleAddToCart(selectedCard)}style = {{backgroundColor :"#FFDE00"}} icon = {<ShoppingCartOutlined />}>
+              Add to Cart
+            </Button>,
+            <Button onClick={() => handleCheckout([selectedCard])} style = {{backgroundColor :"orange"}}>Buy Now</Button>,
+            ]}>
+            <Flex vertical>
+              <div className="modal-parentimg">
+            <img className="modal-img" alt="PVC Conduit Pipes" src={selectedCard.image} />
+            </div>
+            <Flex className="width-full">
+              <Text strong className="width-18-5">Brand : </Text>
+            <Text className="width-50 text-align-left">  {selectedCard?.company} </Text>
+            </Flex>
+            <Flex className="width-full">
+              <Text strong className="width-50">Description : </Text>
+              <Text>  {selectedCard?.description} </Text>
+              </Flex>
+            <Flex className="width-full">
+              <Text strong className="width-18-5">Price : </Text>
+              <Text>  ₹{selectedCard?.price} </Text>
+              </Flex>
+            <Flex className="width-full">
+              <Text strong className="width-18-5">Rating : </Text>
+              <Text> {selectedCard.star_rating}</Text>
+              </Flex>
+            </Flex>
+          
+           
+          </Modal>
       </div>
     </section>
   );
 };
+
 
 export default Cards;

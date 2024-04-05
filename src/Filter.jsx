@@ -93,11 +93,29 @@ function Filter({
       <label>
         <input
           type="checkbox"
-          value="Taptree"
+          value="Astral"
           onChange={handleBrandChange}
-          checked={selectedBrands.includes("Taptree")}
+          checked={selectedBrands.includes("Astral")}
         />{" "}
-        Taptree
+        Astral
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          value="Finolex"
+          onChange={handleBrandChange}
+          checked={selectedBrands.includes("Finolex")}
+        />{" "}
+        Finolex
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          value="Supreme"
+          onChange={handleBrandChange}
+          checked={selectedBrands.includes("Supreme")}
+        />{" "}
+        Supreme
       </label>
       <label>
         <input
@@ -111,38 +129,37 @@ function Filter({
       <label>
         <input
           type="checkbox"
-          value="MLOP"
+          value="Raksha"
           onChange={handleBrandChange}
-          checked={selectedBrands.includes("MLOP")}
+          checked={selectedBrands.includes("Raksha")}
         />{" "}
-        MLOP
+        Raksha
       </label>
       <label>
         <input
           type="checkbox"
-          value="Spazio"
+          value="Ashirvad"
           onChange={handleBrandChange}
-          checked={selectedBrands.includes("Spazio")}
+          checked={selectedBrands.includes("Ashirvad")}
         />{" "}
-        Spazio
+        Ashirvad
       </label>
       <label>
         <input
           type="checkbox"
-          value="Rigwell-Lifetime"
+          value="Sudhakar"
           onChange={handleBrandChange}
-          checked={selectedBrands.includes("Rigwell-Lifetime")}
+          checked={selectedBrands.includes("Sudhakar")}
         />{" "}
-        Rigwell Lifetime
-      </label>
-      <label>
+        Sudhakar
+      </label> <label>
         <input
           type="checkbox"
-          value="AC-Engineers"
+          value="Jain"
           onChange={handleBrandChange}
-          checked={selectedBrands.includes("AC-Engineers")}
+          checked={selectedBrands.includes("Jain")}
         />{" "}
-        AC Engineers
+        Jain 
       </label>
 
       <h4>Ratings ({selectedRating ? selectedRating?.length : 0})</h4>

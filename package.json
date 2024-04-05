@@ -21,6 +21,12 @@
     "vite": "^5.0.0"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.5",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.13",
+    "@mui/material": "^5.15.13",
+    "antd": "^5.15.3",
     "axios": "^1.6.8",
     "react-modal": "^3.16.1",
     "react-modern-drawer": "^1.2.2",
