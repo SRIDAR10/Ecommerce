@@ -199,3 +199,33 @@ body {
 .width-18-5{
   width:18.5%;
 }
+
+.home-page{
+  height: 100vh;
+  overflow: auto;
+  background-color: white !important;
+  font-size: 16px;
+}
+
+.padding-3em{
+  padding: 3em;
+}
+
+.title ::after{
+   content: "";
+   display: block;
+   width: 60px;
+   padding-top: 3px;
+   border-bottom: 2px solid #f9dd94;
+}
+
+.title u {
+  text-decoration:none;
+}
+
+.text{
+  font-size: 20px;
+}
+.mt-10{
+margin-top: 10px;
+}
