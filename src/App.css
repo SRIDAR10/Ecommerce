@@ -23,13 +23,13 @@ body {
   height: 32px;
   display: flex;
   align-items: center;
-  
-  
-
 }
 .app-main-body {
   display: flex;
   overflow: hidden;
+}
+.ant-input{
+  height: inherit;
 }
 .filter {
   height: calc(100vh - 126px);
@@ -68,7 +68,10 @@ body {
     grid-gap: 15px;
   }
 }
+.ant-input-wrapper{
+  height: 100%;
 
+}
 .card {
   width: 100%;
   max-width: 300px;
