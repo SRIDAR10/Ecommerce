@@ -152,7 +152,9 @@ const Cards = ({
                 <Button onClick={() => handleAddToCart(product)}style = {{backgroundColor :"#FFDE00"}} icon = {<ShoppingCartOutlined />}>
                   Add to Cart
                 </Button>
-                <Button onClick={() => handleCheckout([product])} style = {{backgroundColor :"orange"}}>Buy Now</Button>
+                <Button onClick={() => handleCheckout([product])} style = {{backgroundColor :"orange"}}>
+                  
+                  Buy Now</Button>
                 </Flex>
               </div>
             </div>

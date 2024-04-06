@@ -42,14 +42,7 @@ const Login = () => {
 
   return (
     <div className='container'>
-      
-      {/* <form onSubmit={handleSubmit}>
-      <h2>Login</h2>
-        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
-        <button className='butto' type="submit">Login</button>
-       
-      </form> */}
+       <h1 className='login-heading'>Login</h1>
       <Form
     name="basic"
     labelCol={{
@@ -106,7 +99,7 @@ const Login = () => {
     </Form.Item>
     
   </Form>
-  <p>Don't have an Account? <Link to="/register">Register</Link></p>
+  <p className="register-link">Don't have an Account? <Link to="/register">Register</Link></p>
     </div>
   );
 };

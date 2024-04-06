@@ -1,50 +1,46 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:center;
-    text-align: center;
-    background-color: #f9f9f9;
-     min-height: 100vh;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.login-heading {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.ant-form {
+  max-width: 600px;
+  /* margin: auto; */
+  padding: 40px;
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 15px;
   
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    padding: 2em 5em;
-    
-  }
-  
-  input[type="email"],
-  input[type="password"] {
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .butto {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .butto:hover {
-    background-color: #0056b3;
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 10px;
-  }
-  
+}
+
+.ant-form-item {
+  margin-bottom: 15px;
+}
+
+.ant-input {
+  border-radius: 5px;
+  justify-content: left;
+}
+
+.ant-btn-primary {
+  border-radius: 5px;
+}
+
+.ant-btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+

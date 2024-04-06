@@ -38,40 +38,40 @@ function Filter({
       <label>
         <input
           type="checkbox"
-          value="1-500"
+          value="1-19"
           onChange={handleCheckboxChange}
-          checked={selectedPriceRange.includes("1-500")}
+          checked={selectedPriceRange.includes("1-19")}
         />{" "}
-        ₹1 - ₹500
+        ₹1 - ₹19
       </label>
       <label>
         <input
           type="checkbox"
-          value="501-1000"
+          value="20-23"
           onChange={handleCheckboxChange}
-          checked={selectedPriceRange.includes("501-1000")}
+          checked={selectedPriceRange.includes("20-23")}
         />{" "}
-        ₹501 - ₹1000
+        ₹20 - ₹23
       </label>
       <label>
         <input
           type="checkbox"
-          value="1001-2500"
+          value="24-27"
           onChange={handleCheckboxChange}
-          checked={selectedPriceRange.includes("1001-2500")}
+          checked={selectedPriceRange.includes("24-27")}
         />{" "}
-        ₹1001 - ₹2500
+        ₹24 - ₹27
       </label>
       <label>
         <input
           type="checkbox"
-          value="2501-5000"
+          value="28-30"
           onChange={handleCheckboxChange}
-          checked={selectedPriceRange.includes("2501-5000")}
+          checked={selectedPriceRange.includes("28-30")}
         />{" "}
-        ₹2501 - ₹5000
+        ₹28 - ₹30
       </label>
-      <label>
+      {/* <label>
         <input
           type="checkbox"
           value="5001-10000"
@@ -88,7 +88,7 @@ function Filter({
           checked={selectedPriceRange.includes("10001-*")}
         />{" "}
         ₹10001 - *
-      </label>
+      </label> */}
       <h4>Brand ({selectedBrands ? selectedBrands?.length : 0})</h4>
       <label>
         <input

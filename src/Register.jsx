@@ -86,6 +86,7 @@ const Register = () => {
           Have an Account? <Link to="/login">Login</Link>
         </p>
       </form> */}
+      {<h2 className="reg-heading">SIGNUP</h2>}
       <Form
     name="basic"
     labelCol={{

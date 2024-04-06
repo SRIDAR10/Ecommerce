@@ -11,6 +11,7 @@ import Checkout from "./Checkout";
 import { Button, Flex, Input, Space, Typography } from "antd";
 import {
   LogoutOutlined,
+  LoginOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
   PlusCircleOutlined,
@@ -25,7 +26,7 @@ const Main = () => {
   const [selectedRating, setSelectedRating] = useState("");
   const [currentView,setCurrentView]=useState("home");
   const addToCartInfo = JSON.parse(localStorage.getItem("product")) ?? [];
-  const isAuthenticated = JSON.parse(localStorage.getItem("isAuthenticated")) ?? [];
+  const isAuthenticated = JSON.parse(localStorage.getItem("isAuthenticated"));
   const [info, setInfo] = useState(addToCartInfo);
   const navigate=useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -58,6 +59,10 @@ const Main = () => {
   };
 
   const handleCheckout = (addToCartInfo) => {
+    if(!isAuthenticated){
+      navigate("/login");
+      return;
+    }
     axios
       .post("http://localhost:3000/create-checkout-session", addToCartInfo)
       .then((response) => {
@@ -68,14 +73,17 @@ const Main = () => {
     console.log(JSON.parse(localStorage.getItem("product")) ?? []);
   };
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("isAuthenticated");
     window.location.reload();
+  };
+  const handleLogin = () => {
+    navigate("/login");
   };
   const onSearch = (value, _e, info) => {
     console.log(info?.source, value);
     setSearchQuery(value);
   };
-
+console.log(isAuthenticated);
   return (
 
     <main>
@@ -96,9 +104,17 @@ const Main = () => {
           <Text onClick={()=>handleViewClick("home") }style={{color:"white", cursor:"pointer"}}>Home</Text>
           <Text style={{color:"white", cursor:"pointer"}} onClick={()=>handleViewClick("shop")}>Shop</Text>
         <Button style={{height:"44px"}} onClick={toggleDrawer} icon={<ShoppingCartOutlined />} >Cart</Button>
-        <Button style={{height:"44px"}} onClick={handleLogout} icon={<LogoutOutlined />}>
-          Logout
-        </Button>
+        {isAuthenticated  &&
+            <Button style={{height:"44px"}} onClick={handleLogout} icon={<LogoutOutlined />}>
+                Logout
+            </Button>
+        } 
+        {console.log(isAuthenticated)}
+        {!isAuthenticated &&
+          <Button style={{height:"44px"}} onClick={handleLogin} icon={<LoginOutlined />}>
+            Login
+          </Button>
+        }
         </Space>
       </Flex>
       {currentView==="home" && <Home />}
@@ -135,7 +151,14 @@ const Main = () => {
           
           {addToCartInfo.length > 0 && (
             
-            <Button type="primary"  onClick={() => handleCheckout(addToCartInfo)}>
+            <Button type="primary"  onClick={() => {
+              if(!isAuthenticated||!isAuthenticated.length){
+                navigate("/login");
+                return;
+              }
+              handleCheckout(addToCartInfo);
+
+            } }>
               Buy
             </Button>
             

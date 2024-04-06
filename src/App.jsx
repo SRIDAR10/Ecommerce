@@ -18,10 +18,10 @@ export default function App() {
         <Route
           path="/"
           element={
-            <PrivateRoute>
+           // <PrivateRoute>
               <Main />
 
-              </PrivateRoute>
+             // </PrivateRoute>
           }
         />
       </Routes>
