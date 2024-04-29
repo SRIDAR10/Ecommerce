@@ -49,6 +49,8 @@ body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
+  height: 100vh;
+  overflow: auto;
 }
 .header-actions{
   margin-left: auto;

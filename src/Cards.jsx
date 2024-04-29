@@ -148,6 +148,7 @@ const Cards = ({
                 </p>
                 <p className="card-price">₹{product.price}</p>
                 <p className="card-rating">{product.star_rating}</p>
+                <p>Available stock : {product.stock}</p>
                 <Flex gap={6}>
                 <Button onClick={() => handleAddToCart(product)}style = {{backgroundColor :"#FFDE00"}} icon = {<ShoppingCartOutlined />}>
                   Add to Cart

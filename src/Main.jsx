@@ -2,10 +2,12 @@ import { React, useEffect, useState } from "react";
 import Filter from "./Filter";
 import Cards from "./Cards";
 import Home from "./Home";
+import Contact from "./Contact";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import logo from "./images/NS Logo.png";
 import Drawer from "react-modern-drawer";
+import { useLocation } from "react-router-dom";
 import "react-modern-drawer/dist/index.css";
 import Checkout from "./Checkout";
 import { Button, Flex, Input, Space, Typography } from "antd";
@@ -20,6 +22,7 @@ import {
 } from "@ant-design/icons";
 const {Text, Title}=Typography;
 const Main = () => {
+  const location=useLocation();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPriceRange, setSelectedPriceRange] = useState("");
   const [selectedBrands, setSelectedBrands] = useState("");
@@ -34,6 +37,22 @@ const Main = () => {
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
   };
+  useEffect(()=>{
+    // console.log(location.search);
+    if(location.search==="?success=true"){
+      // console.log("hello");
+      const storage = JSON.parse(localStorage.getItem("buy-products"));
+      storage?.map((data)=>{
+        const quantity=data.quantity??1;
+        updateStock(data.product_name,data.stock-quantity);
+      });
+      localStorage.removeItem("buy-products");
+      setInfo(null);
+      navigate("/");
+    }
+  },[location]);
+  console.log("locatiion",location);
+  console.log(location.search);
   const handleViewClick =(view)=>{
     setCurrentView(view);
   }
@@ -59,18 +78,26 @@ const Main = () => {
   };
 
   const handleCheckout = (addToCartInfo) => {
+    //console.log(addToCartInfo);
+    console.log(isAuthenticated);
     if(!isAuthenticated){
       navigate("/login");
       return;
     }
+    localStorage.setItem("buy-products",JSON.stringify(addToCartInfo));
     axios
       .post("http://localhost:3000/create-checkout-session", addToCartInfo)
       .then((response) => {
+        
         console.log("Redirecting to : ", response);
         window.location.href = response.data.redirectUrl;
       });
+      
     console.log(addToCartInfo);
     console.log(JSON.parse(localStorage.getItem("product")) ?? []);
+  };
+  const updateStock = (product_name,stock) =>{
+    axios.post("http://localhost:3000/product-settings/update-stock",{"product_name":product_name,"stock":stock})
   };
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
@@ -103,6 +130,7 @@ console.log(isAuthenticated);
         <Space className="header-actions">
           <Text onClick={()=>handleViewClick("home") }style={{color:"white", cursor:"pointer"}}>Home</Text>
           <Text style={{color:"white", cursor:"pointer"}} onClick={()=>handleViewClick("shop")}>Shop</Text>
+          <Text style={{color:"white", cursor:"pointer"}} onClick={()=>handleViewClick("contact")}>Contact</Text> 
         <Button style={{height:"44px"}} onClick={toggleDrawer} icon={<ShoppingCartOutlined />} >Cart</Button>
         {isAuthenticated  &&
             <Button style={{height:"44px"}} onClick={handleLogout} icon={<LogoutOutlined />}>
@@ -138,6 +166,7 @@ console.log(isAuthenticated);
         />
       </div>
     }
+    {currentView==="contact" && <Contact/>}
       <Drawer
         open={isOpen}
         onClose={toggleDrawer}
@@ -152,10 +181,10 @@ console.log(isAuthenticated);
           {addToCartInfo.length > 0 && (
             
             <Button type="primary"  onClick={() => {
-              if(!isAuthenticated||!isAuthenticated.length){
-                navigate("/login");
-                return;
-              }
+              // if(!isAuthenticated||!isAuthenticated.length){
+              //   navigate("/login");
+              //   return;
+              // }
               handleCheckout(addToCartInfo);
 
             } }>

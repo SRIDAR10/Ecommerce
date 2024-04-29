@@ -19,6 +19,7 @@ const Home = () => {
     <div className="home-page">
       <img src="https://unitechpipes.com/wp-content/uploads/2020/09/6.jpg?id=4069" />
       <div  className="padding-3em">
+      <Title style={{ marginTop: "20px",textAlign: "center" }} rootClassName="title" underline>NS POLYMERS </Title>
       <Title style={{ marginTop: "20px" }} rootClassName="title" underline>About Our Company</Title>
       <Flex vertical>
       <Text className="text">
@@ -33,7 +34,7 @@ const Home = () => {
         Karuppiah Dhanabal. The Corporate Identification Number (CIN) of Ns
         Polymers Private Limited is U22191TZ2023PTC027938. The registered office
         of Ns Polymers Private Limited is at SELVARANI CAMPUS, ALAKKUVARPATTI
-        VILLAGE, CHETTINAYAKKAN PATTI POSTCHETTINAYAKKAN PATTI - KALLIPATTI ROAD
+        VILLAGE, CHETTINAYAKKAN PATTI POST CHETTINAYAKKAN PATTI - KALLIPATTI ROAD
         Dindigul , Tamil Nadu.</Text>
         <Text className="text mt-10">
          Water is a necessity for every living organism to
@@ -72,7 +73,7 @@ const Home = () => {
       <Flex  align="center" justify="center" gap={20} className="padding-3em">
         <img src="https://unitechpipes.com/wp-content/uploads/2020/10/1488-2048x1365.jpg" width={600} height={600}/>
         <Flex vertical>
-          <Title rootClassName="title" underline>Our Mission</Title>
+          <Title rootClassName="title" underline>Mission</Title>
           <Text className="text">
             Maximize value in terms of client satisfaction by creating a high
             performance organization with innovation and leadership. To strive
@@ -83,7 +84,7 @@ const Home = () => {
       </Flex>
       <Flex align="center" justify="center" gap={20} className="padding-3em">
       <Flex vertical>
-          <Title className="title" underline>Our Vision</Title>
+          <Title className="title" underline>Vision</Title>
           <Text rootClassName="text">
           We aim to be sincerely global and be the trendsetters in the industry by setting high values and morals. We see ourselves and our fellow men leading the path of success. We endeavor to create an open environment which promotes progressive learning and innovation.
           </Text>
