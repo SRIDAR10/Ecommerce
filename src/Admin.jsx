@@ -4,19 +4,22 @@ import { Button, Flex, Input, Space, Typography, Rate } from "antd";
 import {
   PlusCircleOutlined,
   MinusCircleOutlined,
-  CloseCircleOutlined,
   PlusOutlined,
   LeftOutlined,
+  DeleteOutlined,
 } from "@ant-design/icons";
 import AddProduct from "./AddProduct";
 import { useNavigate } from "react-router-dom";
 import AddCompany from "./AddComapny";
+import DeletePopup from "./DeletePopup";
 const { Text, Title } = Typography;
 const Admin = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState();
   const [openAddProductDrawer, setOpenAddProductDrawer] = useState(false);
   const [openAddCompanyDrawer, setOpenAddCompanyDrawer] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [companies, setCompanies] = useState([]);
 
   useEffect(() => {
@@ -63,12 +66,14 @@ const Admin = () => {
     }
     return string.slice(0, number) + "...";
   };
+
   const updateStock = (product_name, stock) => {
     axios.post("http://localhost:3000/product-settings/update-stock", {
       product_name: product_name,
       stock: stock,
     });
   };
+
   const removeStock = (product) => {
     const updateProduct = products.map((data) => {
       if (product.product_name === data.product_name) {
@@ -82,6 +87,7 @@ const Admin = () => {
     console.log(updateProduct);
     setProducts(updateProduct);
   };
+
   const addStock = (product) => {
     const updateProduct = products.map((data) => {
       if (product.product_name === data.product_name) {
@@ -98,6 +104,11 @@ const Admin = () => {
 
   const onClose = () => {
     setOpenAddProductDrawer(false);
+  };
+
+  const deleteProduct = (product) => {
+    setProductToDelete(product);
+    setOpenDeleteModal(true);
   };
 
   const addCompany = async (values) => {
@@ -131,6 +142,29 @@ const Admin = () => {
   const handleClose = () => {
     setOpenAddCompanyDrawer(false);
   };
+  const closeDeleteModal = () => {
+    setOpenDeleteModal(false);
+    setProductToDelete(null);
+  };
+
+  const handleDeleteProduct=()=>{
+    const response = axios
+    .get(`http://localhost:3000/product/delete-product?productId=${productToDelete?._id}`)
+    .then((data) => {
+      setOpenDeleteModal(false);
+      try {
+        const response = axios
+          .get("http://localhost:3000/product/get-products")
+          .then((data) => {
+            console.log(data);
+            setProducts(data?.data?.products);
+          });
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    });
+  }
 
   return (
     <>
@@ -207,6 +241,9 @@ const Admin = () => {
                     icon={<PlusCircleOutlined />}
                     onClick={() => addStock(product)}
                   ></Button>
+                  <Button onClick={() => deleteProduct(product)}>
+                    <DeleteOutlined />
+                  </Button>
                 </Flex>
               </div>
             </div>
@@ -222,6 +259,18 @@ const Admin = () => {
         onSave={addCompany}
         open={openAddCompanyDrawer}
         close={handleClose}
+      />
+      <DeletePopup
+        showModal={openDeleteModal}
+        handleClose={closeDeleteModal}
+        actionComponents={[
+          <Button key="back" onClick={() => setOpenDeleteModal(false)}>
+            Cancel
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleDeleteProduct} danger>
+            Delete
+          </Button>,
+        ]}
       />
     </>
   );
