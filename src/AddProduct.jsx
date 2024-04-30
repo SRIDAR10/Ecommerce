@@ -11,7 +11,12 @@ const layout = {
 
 const AddProduct = ({ openDrawer, handleClose, setProducts, companies }) => {
   const [form] = Form.useForm();
-
+const getRandomNumber = () => {
+    // Generate a random number between 0 and 4
+    const randomNumber = Math.floor(Math.random() * 5);
+    // Add 1 to the random number to shift the range to 1-5
+    return randomNumber + 1;
+  };
   const onFinish = async (values) => {
     console.log(values);
     console.log(companies?.find((data) => data.value === values.company));
@@ -28,6 +33,7 @@ const AddProduct = ({ openDrawer, handleClose, setProducts, companies }) => {
         description: values.description,
         price: Number(values?.price),
         stock: Number(values?.stock),
+        star_rating: Number(getRandomNumber())
       };
       try {
         const response = await axios
