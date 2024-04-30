@@ -1,46 +1,51 @@
 .container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  background-color: #f9f9f9;
-  min-height: 100vh;
+  height: 100vh;
+}
+
+.login-image {
+  flex: 1;
+  max-width: 50%;
+  padding: 20px;
+}
+
+.login-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.login-form {
+  flex: 1;
+  max-width: 50%;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 400px;
+  margin-left: 20px;
 }
 
 .login-heading {
-  text-align: center;
+  font-size: 24px;
   margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.ant-form {
-  max-width: 600px;
-  /* margin: auto; */
-  padding: 40px;
-  border: 1px solid hsl(0, 0%, 80%);
-  border-radius: 15px;
-  
+.form-item {
+  margin-bottom: 16px;
 }
 
-.ant-form-item {
-  margin-bottom: 15px;
+.register-link {
+  margin-top: 16px;
+  text-align: center;
 }
 
-.ant-input {
-  border-radius: 5px;
-  justify-content: left;
+.register-link a {
+  color: #1890ff;
 }
 
-.ant-btn-primary {
-  border-radius: 5px;
-}
 
-.ant-btn-primary:hover {
-  background-color: #0056b3;
-}
-
-.error-message {
-  color: red;
-  margin-top: 10px;
-}
 
