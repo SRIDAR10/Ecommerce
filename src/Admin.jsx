@@ -169,7 +169,7 @@ const Admin = () => {
           </Button>
         </Flex>
       </Flex>
-      <div className="grid">
+      <div className="grid admin-products">
         {products &&
           products?.length &&
           products.map((product) => (

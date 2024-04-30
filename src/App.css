@@ -242,3 +242,7 @@ margin-top: 10px;
 .mr-20{
   margin-right: 20px;
 }
+
+.admin-products{
+  height: calc(100vh - 117px) !important;
+}
